@@ -1,0 +1,12 @@
+CELERY_PWD: clusterPWD
+CELERY_USER: cluster
+USER: ubuntu
+celeryuri: amqp://cluster:clusterPWD@52.26.193.232:5672/
+keyfile: testiis.pem
+n_worker: 2
+programdir: deathrabbit
+roles:
+  all: [52.26.193.232, 192.168.5.111]
+  master: [52.26.193.232]
+  slave: [192.168.5.111]
+s3_bucket: deathrabbit

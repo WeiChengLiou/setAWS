@@ -1,0 +1,11 @@
+CELERY_PWD: clusterPWD
+CELERY_USER: cluster
+USER: ubuntu
+celeryuri: amqp://cluster:clusterPWD@52.11.132.180:5672/
+n_worker: 1
+programdir: deathrabbit
+roles:
+  all: [52.11.132.180]
+  master: [52.11.132.180]
+  slave: []
+s3_bucket: deathrabbit

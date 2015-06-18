@@ -1,0 +1,28 @@
+# Doing parallel jobs using AWS, celery, fabric
+
+setAWS.py: main program, mainly for using AWS EC2/S3 service
+setIIS.py: common jobs, define common functions for different clusters (Ex: iis cloud).
+deathrabbit: the computing jobs need to be done
+parm.yaml: configuration file
+fabfile.py: deploy job definition
+
+
+### Local Requirements
+
+1. Fabric
+2. boto
+
+
+### Notice
+
+1. When run setDepPkg in the master the first time, There's a time displaying "A new version of /boot/grub/menu.lst is available, but the version installed currently has been locally modifies" on the screen. Need to press "Enter" manually.
+
+2. When first time run rsync in fabric, Should press "yes" to establish authentication.
+
+
+### Reference
+
+1. boto: https://boto.readthedocs.org/en/latest/
+2. Fabric: http://www.fabfile.org/
+3. celery: http://www.celeryproject.org/
+
