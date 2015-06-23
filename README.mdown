@@ -1,5 +1,8 @@
 # Doing parallel jobs using AWS, celery, fabric
 
+
+### File Description (partial)
+
 1. setAWS.py: main program, mainly for using AWS EC2/S3 service
 2. setIIS.py: common jobs, define common functions for different clusters (Ex: iis cloud).
 3. deathrabbit: the computing jobs need to be done
@@ -9,8 +12,17 @@
 
 ### Local Requirements
 
-1. Fabric
-2. boto
+Execute the following command in terminal: 
+
+    >> pip install boto fabric
+
+
+### Set up for boto
+
+boto needs to set up configure file before first-time use:
+
+1. Replace AWS key in .boto.sample
+2. Copy ".boto.sample" to "~/.boto"
 
 
 ### Notice
