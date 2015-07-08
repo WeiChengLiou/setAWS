@@ -368,6 +368,17 @@ def getresv0():
     return resv0
 
 
+def renewHost():
+    # Update worker list in parm.yaml manually
+    ips = []
+    with open('hosts', 'rb') as f:
+        for li in f:
+            ip, host = li[:-1].split(' ')
+            ips.append(ip)
+        master = ips.pop(0)
+    chkparm(master, ips)
+
+
 if __name__ == '__main__':
     """"""
     if len(sys.argv) == 1:
