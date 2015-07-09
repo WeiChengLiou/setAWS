@@ -9,9 +9,6 @@ from os.path import join
 from shutil import copy
 
 
-chain = it.chain.from_iterable
-
-
 def dprint(li):
     for r in li:
         pprint(r.__dict__)

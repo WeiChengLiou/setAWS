@@ -11,9 +11,8 @@ from os.path import basename, realpath, exists, join
 import os
 import time
 import cPickle
-from utils import *
-from shutil import copy
-from setIIS import chkparm
+from utils import chkparm, loadparm, saveparm, call
+import itertools as it
 
 # AMI: https://aws.amazon.com/marketplace/ordering?productId=ecd5575e-d805-450e-843e-f2a9872b8c80&ref_=dtl_psb_continue&region=us-east-1
 
@@ -209,7 +208,7 @@ def makeHosts(vpc, resv0, ipboss, n_inst):
 
     hosts = '\n'.join(
         ['{0} worker{1:03}'.format(ip, i)
-            for i, ip in enumerate(chain([[ipboss], ips]))])
+            for i, ip in enumerate(it.chain([ipboss], ips))])
     print hosts
     with open('hosts', 'wb') as f:
         f.write(hosts)
