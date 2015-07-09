@@ -45,3 +45,8 @@ def shutdown():
     sudo('shutdown -h 1')
 
 
+@parallel
+@roles('all')
+def TimeSync():
+    sudo('ntpdate tick.stdtime.gov.tw')
+
