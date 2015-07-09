@@ -9,18 +9,17 @@ from shutil import copy
 
 def loadhost():
     fi = 'hosts'
-    ipboss, ips = None, []
+    ips = []
     with open(fi, 'rb') as f:
         for li in f:
             ret = li.split(' ')
-            if ipboss is None:
-                ipboss = ret[0]
-            else:
-                ips.append(ret[0])
+            ips.append(ret[0])
+        ipboss = ips.pop(0)
     return ipboss, ips
 
 
 def chkparm(ipboss, slaves, **kwargs):
+    # Update parameters
     parm = loadparm()
 
     parm['n_worker'] = len(slaves) + 1
@@ -38,6 +37,11 @@ def chkparm(ipboss, slaves, **kwargs):
     for fi1 in ('hosts.py', 'parm.yaml'):
         copy(fi1, join(parm['programdir'], fi1))
     return parm
+
+
+def renewHost():
+    # Update worker list in parm.yaml manually
+    chkparm(*loadhost())
 
 
 def comments(ip):
