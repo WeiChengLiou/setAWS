@@ -1,47 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from os.path import join
 import sys
-from utils import call, loadparm, saveparm, chain
-from shutil import copy
-
-
-def loadhost():
-    fi = 'hosts'
-    ips = []
-    with open(fi, 'rb') as f:
-        for li in f:
-            ret = li.split(' ')
-            ips.append(ret[0])
-        ipboss = ips.pop(0)
-    return ipboss, ips
-
-
-def chkparm(ipboss, slaves, **kwargs):
-    # Update parameters
-    parm = loadparm()
-
-    parm['n_worker'] = len(slaves) + 1
-    parm['roles']['master'] = [ipboss]
-    parm['roles']['slave'] = slaves
-    parm['roles']['all'] = list(chain([[ipboss], slaves]))
-    parm['celeryuri'] = 'amqp://{USER}:{PWD}@{IP}:5672/'.format(
-        USER=parm['CELERY_USER'],
-        PWD=parm['CELERY_PWD'],
-        IP=ipboss)
-    for k, v in kwargs.iteritems():
-        parm[k] = v
-    saveparm(parm)
-
-    for fi1 in ('hosts.py', 'parm.yaml'):
-        copy(fi1, join(parm['programdir'], fi1))
-    return parm
-
-
-def renewHost():
-    # Update worker list in parm.yaml manually
-    chkparm(*loadhost())
+from utils import call, loadhost, chkparm
 
 
 def comments(ip):
